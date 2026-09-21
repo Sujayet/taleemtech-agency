@@ -1,0 +1,170 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root, .theme-dark {
+  /* Charcoal + warm white + the red from the Taleem Tech logo (#FD3231) */
+  --bg-rgb: 20 21 24;
+  --surface-rgb: 29 30 34;
+  --surface-2-rgb: 40 41 46;
+  --text-rgb: 246 244 241;
+  --muted-rgb: 166 168 175;
+  --accent-rgb: 255 75 78;        /* logo red, lifted slightly so red text reads well on charcoal */
+  --accent-ink-rgb: 255 255 255;
+  --glow-rgb: 253 50 49;          /* exact logo red, used for glows and fills */
+  --line: rgba(255, 255, 255, 0.1);
+  --glass-a: rgba(44, 45, 51, 0.68);
+  --glass-b: rgba(30, 31, 35, 0.58);
+  --glass-shadow: none;
+  --bg: rgb(var(--bg-rgb));
+  --surface: rgb(var(--surface-rgb));
+  --surface-2: rgb(var(--surface-2-rgb));
+  --text: rgb(var(--text-rgb));
+  --muted: rgb(var(--muted-rgb));
+  --accent: rgb(var(--accent-rgb));
+  --accent-ink: rgb(var(--accent-ink-rgb));
+  color-scheme: dark;
+}
+.theme-dark { color: rgb(var(--text-rgb)); }
+
+/* White band: used for the price list. Everything inside re-colours automatically. */
+.theme-light {
+  --bg-rgb: 250 248 245;
+  --surface-rgb: 255 255 255;
+  --surface-2-rgb: 240 237 233;
+  --text-rgb: 24 25 28;
+  --muted-rgb: 96 99 107;
+  --accent-rgb: 200 32 42;        /* deeper red: 5.7:1 contrast on white */
+  --accent-ink-rgb: 255 255 255;
+  --glow-rgb: 253 50 49;
+  --line: rgba(24, 25, 28, 0.12);
+  --glass-a: rgba(255, 255, 255, 0.98);
+  --glass-b: rgba(255, 255, 255, 0.86);
+  --glass-shadow: 0 24px 44px -28px rgba(24, 25, 28, 0.35);
+  --bg: rgb(var(--bg-rgb));
+  --surface: rgb(var(--surface-rgb));
+  --surface-2: rgb(var(--surface-2-rgb));
+  --text: rgb(var(--text-rgb));
+  --muted: rgb(var(--muted-rgb));
+  --accent: rgb(var(--accent-rgb));
+  --accent-ink: rgb(var(--accent-ink-rgb));
+  color-scheme: light;
+  background: rgb(var(--bg-rgb));
+  color: rgb(var(--text-rgb));
+}
+
+@layer base {
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+  body {
+    @apply bg-bg font-sans text-ink antialiased;
+    overflow-x: hidden;
+  }
+  section[id] { scroll-margin-top: 5.5rem; }
+  /* Slide-in reveals and rotating rings briefly extend past the edge: clip (not hide) so sticky still works and phones never wobble sideways. */
+  #root { overflow-x: clip; }
+  h1, h2, h3 { @apply font-display; text-wrap: balance; }
+  p { text-wrap: pretty; }
+  ::selection { background: var(--accent); color: var(--accent-ink); }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 6px; }
+}
+
+@layer components {
+  .container-x { @apply mx-auto w-full max-w-6xl px-5 sm:px-8; }
+  .section-y { @apply py-24 sm:py-32; }
+  .glass {
+    background: linear-gradient(180deg, var(--glass-a), var(--glass-b));
+    border: 1px solid var(--line);
+    box-shadow: var(--glass-shadow);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+  .hairline { border: 1px solid var(--line); }
+  /* Navbar surface: always dark charcoal, even when scrolled over the white price band */
+  .nav-glass {
+    background: rgba(24, 25, 28, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    color: #f6f4f1;
+  }
+
+  /* Primary button: deep logo red with a soft top highlight (white text stays AA-readable) */
+  .btn-red {
+    background: linear-gradient(180deg, #e02d34 0%, #b3161d 100%);
+    color: #fff;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.28), inset 0 -1px 0 rgba(0,0,0,.2), 0 12px 30px -12px rgb(var(--glow-rgb) / .7);
+  }
+  .btn-red:hover { filter: brightness(1.08); }
+
+  /* --- 3D helpers --- */
+  .preserve-3d { transform-style: preserve-3d; }
+  .depth-1 { transform: translateZ(22px); }
+  .depth-2 { transform: translateZ(44px); }
+  .tilt-glare {
+    position: absolute; inset: 0; border-radius: inherit; pointer-events: none;
+    opacity: 0; transition: opacity .3s ease;
+    background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 50%), rgb(var(--accent-rgb) / .16), transparent 60%);
+  }
+  .group:hover .tilt-glare { opacity: 1; }
+
+  /* Rotating 3D ring of platform slabs */
+  .ring-stage { perspective: 1400px; height: 22rem; }
+  .carousel3d { position: relative; width: 15rem; height: 17rem; margin: 2rem auto 0; transform-style: preserve-3d; }
+  .ring-spin { animation: spin3d 26s linear infinite; }
+  .ring-stage:hover .ring-spin, .ring-stage:focus-within .ring-spin { animation-play-state: paused; }
+  .slab {
+    position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden;
+    transform: rotateY(calc(var(--i) * 120deg)) translateZ(15.5rem);
+  }
+  @media (max-width: 640px) {
+    .ring-stage { height: 20rem; }
+    .carousel3d { width: 12.5rem; height: 15rem; }
+    .slab { transform: rotateY(calc(var(--i) * 120deg)) translateZ(11rem); }
+  }
+
+  /* Perspective floor grid used behind the CTA */
+  .floor-grid {
+    position: absolute; left: -50%; right: -50%; bottom: -8%; height: 100%;
+    transform: perspective(600px) rotateX(62deg); transform-origin: bottom;
+    background-image:
+      linear-gradient(to right, rgb(var(--glow-rgb) / .38) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(var(--glow-rgb) / .38) 1px, transparent 1px);
+    background-size: 64px 64px;
+    mask-image: linear-gradient(to top, #000 30%, transparent 95%);
+    -webkit-mask-image: linear-gradient(to top, #000 30%, transparent 95%);
+    animation: gridflow 2.4s linear infinite;
+  }
+
+  /* Orbit rings (About) */
+  .orbit-stage { perspective: 900px; }
+  .orbit { position: absolute; inset: 0; border-radius: 9999px; border: 1.5px solid rgb(var(--text-rgb) / .38); transform-style: preserve-3d; }
+
+  .nav-link { position: relative; }
+  .nav-link::after {
+    content: ''; position: absolute; left: 12px; right: 12px; bottom: 4px; height: 1px;
+    background: var(--accent); transform: scaleX(0); transform-origin: left; transition: transform .3s ease;
+  }
+  .nav-link:hover::after { transform: scaleX(1); }
+}
+
+/* Reduced motion: stop decorative motion, flatten 3D */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: .001ms !important; animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important;
+  }
+  .ring-stage { height: auto; perspective: none; }
+  .carousel3d { width: 100%; height: auto; margin: 0; display: grid; gap: 1rem; transform: none !important; }
+  .ring-spin { animation: none; }
+  .slab { position: relative; inset: auto; transform: none; min-height: 9rem; }
+  .floor-grid { animation: none; }
+}
+
+@keyframes fadein { from { opacity: 0; } to { opacity: 1; } }
+
+/* Isometric layer stack (Why section) */
+.layers { perspective: 1000px; }
+.layers-inner { transform-style: preserve-3d; transform: rotateX(58deg) rotateZ(-38deg); }
+.layer { position: absolute; inset: 0; border-radius: 1.25rem; transition: transform .6s cubic-bezier(.22,1,.36,1); }
+@media (prefers-reduced-motion: reduce) { .layers-inner { transform: rotateX(58deg) rotateZ(-38deg); } }
