@@ -8,6 +8,8 @@ const pillars = [
 
 /** The (static) 3D badge, with three faint rings turning slowly behind it: technology, creativity, business. */
 function Emblem() {
+  const badgeUrl = `${import.meta.env.BASE_URL}brand/logo-badge-3d.webp`;
+
   return (
     <div className="relative mx-auto aspect-square w-full max-w-md">
       <div className="orbit-stage absolute inset-0" aria-hidden="true">
@@ -18,7 +20,7 @@ function Emblem() {
         </div>
       </div>
       <img
-        src="/brand/logo-badge-3d.webp"
+        src={badgeUrl}
         width="800" height="798" loading="lazy" decoding="async"
         alt="Taleem Tech badge: Dream comes true"
         className="absolute left-1/2 top-1/2 z-10 w-[64%] -translate-x-1/2 -translate-y-1/2"
