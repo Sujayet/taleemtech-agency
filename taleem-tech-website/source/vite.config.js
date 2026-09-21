@@ -2,6 +2,7 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
 export default defineConfig({
+  base: '/taleemtech-agency/',
   plugins: [react()],
   server: {
     port: 5173,
@@ -11,7 +12,7 @@ export default defineConfig({
     rollupOptions: {
       output: {
         manualChunks: {
-          three: ['three'], // loaded lazily, only for the hero scene
+          three: ['three'],
           motion: ['framer-motion'],
         },
       },
