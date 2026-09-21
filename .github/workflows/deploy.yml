@@ -1,5 +1,4 @@
-
-name: Deploy Website
+name: Deploy Vite Website to GitHub Pages
 
 on:
   push:
@@ -11,14 +10,19 @@ permissions:
   pages: write
   id-token: write
 
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
-
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
 
-      - uses: actions/setup-node@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
           node-version: 20
 
@@ -26,14 +30,18 @@ jobs:
         working-directory: taleem-tech-website/source
         run: npm install
 
-      - name: Build
+      - name: Build website
         working-directory: taleem-tech-website/source
         run: npm run build
 
-      - uses: actions/configure-pages@v5
+      - name: Setup GitHub Pages
+        uses: actions/configure-pages@v5
 
-      - uses: actions/upload-pages-artifact@v3
+      - name: Upload build artifact
+        uses: actions/upload-pages-artifact@v3
         with:
           path: taleem-tech-website/source/dist
 
-      - uses: actions/deploy-pages@v4
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
