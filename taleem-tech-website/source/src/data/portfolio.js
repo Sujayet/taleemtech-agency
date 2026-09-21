@@ -1,21 +1,66 @@
 /**
- * Placeholder projects. Replace with real work:
- *  - set isPlaceholder: false
- *  - add `href` (live link / case study) to show the "View project" button
- *  - `mockup` picks the built-in preview: browser | phone | social | video | brand | catalog
- *    (or add `image: '/work/your-image.webp'` to use a real screenshot instead)
+ * Portfolio content for the Work section.
+ * Replace `isPlaceholder: true` and add an `image` / `href` when a real project is ready.
  */
 export const projects = [
-  { id: 'p1', title: 'Boutique storefront', category: 'Websites', mockup: 'browser',
-    description: 'Sample layout: product-led homepage with a fast checkout path.', isPlaceholder: true, href: null },
-  { id: 'p2', title: 'Order tracker app', category: 'Apps', mockup: 'phone',
-    description: 'Sample layout: a simple order and stock app for a small shop.', isPlaceholder: true, href: null },
-  { id: 'p3', title: 'Seller catalog set', category: 'Marketplace', mockup: 'catalog',
-    description: 'Sample layout: consistent catalog images and listing structure.', isPlaceholder: true, href: null },
-  { id: 'p4', title: 'Festival campaign pack', category: 'Social Media', mockup: 'social',
-    description: 'Sample layout: a coordinated set of posts and stories.', isPlaceholder: true, href: null },
-  { id: 'p5', title: 'Product reel', category: 'Video', mockup: 'video',
-    description: 'Sample layout: a short vertical promo cut for reels.', isPlaceholder: true, href: null },
-  { id: 'p6', title: 'Brand starter kit', category: 'Branding', mockup: 'brand',
-    description: 'Sample layout: logo mark, colours and type in one sheet.', isPlaceholder: true, href: null },
+  {
+    id: 'p1',
+    title: 'Business Website Experience',
+    category: 'Website Design & Development',
+    mockup: 'browser',
+    description: 'Premium, responsive websites designed to communicate your brand and convert visitors into enquiries.',
+    tags: ['UI/UX', 'Responsive', 'React'],
+    isPlaceholder: true,
+    href: null,
+  },
+  {
+    id: 'p2',
+    title: 'E-commerce Storefront',
+    category: 'E-commerce Websites',
+    mockup: 'browser',
+    description: 'Conversion-focused online stores with clear product journeys, mobile-first layouts and streamlined checkout experiences.',
+    tags: ['E-commerce', 'Product UI', 'Conversion'],
+    isPlaceholder: true,
+    href: null,
+  },
+  {
+    id: 'p3',
+    title: 'Marketplace Seller Growth',
+    category: 'Meesho / Amazon / Flipkart Work',
+    mockup: 'catalog',
+    description: 'Structured product catalogues, listing creatives and marketplace support for growing online sellers.',
+    tags: ['Listings', 'Catalogues', 'Seller Support'],
+    isPlaceholder: true,
+    href: null,
+  },
+  {
+    id: 'p4',
+    title: 'Social Campaign Creative Suite',
+    category: 'Social Media & Creative Designs',
+    mockup: 'social',
+    description: 'Consistent social media creatives built for promotions, launches, offers and stronger brand recall.',
+    tags: ['Campaigns', 'Post Design', 'Stories'],
+    isPlaceholder: true,
+    href: null,
+  },
+  {
+    id: 'p5',
+    title: 'Short-Form Video Campaign',
+    category: 'Video Editing & Reels',
+    mockup: 'video',
+    description: 'Engaging short-form edits with pacing, text overlays and visual storytelling for digital campaigns.',
+    tags: ['Reels', 'Editing', 'Motion'],
+    isPlaceholder: true,
+    href: null,
+  },
+  {
+    id: 'p6',
+    title: 'Visual Brand Identity Kit',
+    category: 'Branding & Logo Design',
+    mockup: 'brand',
+    description: 'Distinctive logo directions, colour systems and visual assets that create a consistent brand identity.',
+    tags: ['Logo', 'Identity', 'Brand System'],
+    isPlaceholder: true,
+    href: null,
+  },
 ];
