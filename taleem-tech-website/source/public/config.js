@@ -6,8 +6,7 @@ window.TALEEM_CONFIG = {
   contact: {
     // REQUIRED. Every enquiry from the website form is sent to this WhatsApp number.
     // Digits only, with country code and no + or spaces.
-    // Example for India: 91 followed by your 10-digit number  ->  '919876543210'
-    whatsapp: '',
+    whatsapp: '918910499357',
 
     email: '',     // shown on the website, e.g. 'hello@yourdomain.com'
     phone: '',     // shown on the website, e.g. '+91 98765 43210'
