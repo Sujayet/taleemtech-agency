@@ -9,7 +9,7 @@ window.TALEEM_CONFIG = {
     whatsapp: '918910499357',
 
     email: '',     // shown on the website, e.g. 'hello@yourdomain.com'
-    phone: '',     // shown on the website, e.g. '+91 98765 43210'
+    phone: '+91 89104 99357',
     address: '',   // e.g. 'Kolkata, West Bengal'
   },
 
